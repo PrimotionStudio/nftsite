@@ -1,4 +1,3 @@
-
 <section class="tf-login tf-section">
     <div class="themesflat-container">
         <div class="row">
@@ -13,11 +12,12 @@
                     </div>
 
                     <div class="form-inner">
-                        <form action="#" id="contactform">
-                            <input id="name" name="name" tabindex="1" value="" aria-required="true" required type="text" placeholder="Your Full Name">
-                            <input id="email" name="email" tabindex="2"  value="" aria-required="true" type="email" placeholder="Your Email Address" required>
-                            <input id="pass" name="pass" tabindex="3"  value="" aria-required="true" type="text" placeholder="Set Your Password" required>
-                            
+                        <form action="" method="post" id="contactform">
+                            <input id="username" name="username" tabindex="1" value="" aria-required="true" required type="text" placeholder="Your Username">
+                            <input id="email" name="email" tabindex="2" value="" aria-required="true" type="email" placeholder="Your Email Address" required>
+                            <input id="pass" name="password" tabindex="3" value="" aria-required="true" type="text" placeholder="Set Your Password" required>
+                            <input id="password" name="confirm" tabindex="4" value="" aria-required="true" type="text" placeholder="Confirm Your Password" required>
+
                             <button class="submit">Sign Up</button>
                             <div class="mt-5">
                                 <h5>Already Have An Account? <a href="sign-in" style="text-decoration: underline">Sign In</a></h5>

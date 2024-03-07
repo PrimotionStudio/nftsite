@@ -1,27 +1,33 @@
 <?php
+require_once("required/session.php");
 const PAGE_TITLE = "Sign In";
-require_once("includes/head.php");
+require_once("required/sql.php");
+// require_once("func/sign-in.php");
+include_once("includes/head.php");
+include_once("includes/alert.php");
 ?>
+
 <body class="body header-fixed is_dark">
 
     <?php
-    require_once("includes/preloader.php")
+    include_once("includes/preloader.php")
     ?>
     <div id="wrapper">
         <div id="page" class="clearfix">
 
             <?php
-            require_once("includes/header.php");
-            require_once("includes/title.php");
-            require_once("includes/sign-in-form.php");
-            require_once("includes/footer.php");
+            include_once("includes/header.php");
+            include_once("includes/title.php");
+            include_once("includes/sign-in-form.php");
+            include_once("includes/footer.php");
             ?>
         </div>
         <!-- /#page -->
     </div>
     <!-- /#wrapper -->
     <?php
-    require_once("includes/bottom.php");
+    include_once("includes/bottom.php");
     ?>
 </body>
+
 </html>

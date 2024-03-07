@@ -1,27 +1,27 @@
 <?php
 const PAGE_TITLE = "Forgot Password";
-require_once("includes/head.php");
+include_once("includes/head.php");
 ?>
 <body class="body header-fixed is_dark">
 
     <?php
-    require_once("includes/preloader.php")
+    include_once("includes/preloader.php")
     ?>
     <div id="wrapper">
         <div id="page" class="clearfix">
 
             <?php
-            require_once("includes/header.php");
-            require_once("includes/title.php");
-            require_once("includes/forgot-form.php");
-            require_once("includes/footer.php");
+            include_once("includes/header.php");
+            include_once("includes/title.php");
+            include_once("includes/forgot-form.php");
+            include_once("includes/footer.php");
             ?>
         </div>
         <!-- /#page -->
     </div>
     <!-- /#wrapper -->
     <?php
-    require_once("includes/bottom.php");
+    include_once("includes/bottom.php");
     ?>
 </body>
 </html>
