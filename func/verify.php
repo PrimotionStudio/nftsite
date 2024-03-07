@@ -1,31 +1,32 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$email = $_POST["email"];
-	$password = $_POST["password"];
-	$select_user = "SELECT id, username, email, password FROM users
-					WHERE username='$email' || email='$email'";
+	$user_id = $_POST["user_id"];
+	$mail = $_POST["mail"];
+	$otp = $_POST["otp"];
+	$select_user = "SELECT * FROM users
+					WHERE id='$user_id' || email='$mail'";
 	$query_user = mysqli_query($con, $select_user);
 	if (mysqli_num_rows($query_user) == 0) {
-		$_SESSION["alert"] = "Cannot find account linked with that username or email.";
+		$_SESSION["alert"] = "Cannot find account";
 		header("location: sign-in");
 	} else {
 		$getuser = mysqli_fetch_assoc($query_user);
-		if ($getuser["password"] != $password) {
-			$_SESSION["alert"] = "Invalid Login Credentials";
-			header("location: sign-in");
+		$select_otp = "SELECT * FROM otp WHERE user_id='$user_id' && otp_code='$otp'";
+		$query_otp = mysqli_query($con, $select_otp);
+		$get_otp = mysqli_fetch_assoc($query_otp);
+		if ($get_otp["otp_code"] != $otp) {
+			$_SESSION["alert"] = "Invalid Verification Code";
+			header("location: verify");
 		} else {
-			$otp = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
-			$_SESSION["otp_mail"] = $getuser["email"];
-			$create_otp = "INSERT INTO otp (user_id, otp_type_ otp_code)
-							VALUES ('" . $getuser["id"] . "', 'verify', '$otp')";
-			$query_otp = mysqli_query($con, $create_otp);
-			// Send Mail Here
+			$delete_otp = "DELETE FROM otp WHERE user_id='$user_id' && otp_code='$otp'";
+			$query_del_otp = mysqli_query($con, $delete_otp);
 			$loginkey = password_hash(time(), PASSWORD_BCRYPT);
 			$login_user = "UPDATE users SET loginkey='$loginkey'
-							WHERE username='$email' || email='$email'";
+							WHERE id='$user_id' || email='$mail'";
 			$query_login = mysqli_query($con, $login_user);
 			$_SESSION["loginkey"] = $loginkey;
-			$_SESSION["user_id"] = $getuser["id"];
+			$_SESSION["user_id"] = $user_id;
+			unset($_SESSION["otp_mail"]);
 			header("location: account/");
 		}
 	}

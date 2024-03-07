@@ -3,7 +3,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$email = $_POST["email"];
 	$password = $_POST["password"];
 	$select_user = "SELECT id, username, email, password FROM users
-					WHERE username='$email' || email='$email'";
+					WHERE username='$email' || email='$email' && verified='true'";
 	$query_user = mysqli_query($con, $select_user);
 	if (mysqli_num_rows($query_user) == 0) {
 		$_SESSION["alert"] = "Cannot find account linked with that username or email.";
@@ -14,13 +14,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$_SESSION["alert"] = "Invalid Login Credentials";
 			header("location: sign-in");
 		} else {
-			$otp = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
-			$_SESSION["otp_mail"] = $getuser["email"];
-			$create_otp = "INSERT INTO otp (user_id, otp_type_ otp_code)
-							VALUES ('" . $getuser["id"] . "', 'verify', '$otp')";
-			$query_otp = mysqli_query($con, $create_otp);
-			// Send Mail Here
-			header("location: verify");
+			$loginkey = password_hash(time(), PASSWORD_BCRYPT);
+			$login_user = "UPDATE users SET loginkey='$loginkey'
+							WHERE username='$email' || email='$email'";
+			$query_login = mysqli_query($con, $login_user);
+			$_SESSION["loginkey"] = $loginkey;
+			$_SESSION["user_id"] = $getuser["id"];
+			$_SESSION["alert"] = "Your account has been created";
+			header("location: account/");
 		}
 	}
 }
