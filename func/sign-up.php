@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$_SESSION["alert"] = "Passwords do not match";
 		header("location: sign-up");
 	} else {
-		$select_duplicate = "SELECT id, username, email FROM users WHERE username=? || email=?";
+		$select_duplicate = "SELECT id, username, email FROM users WHERE username='$username' || email='$email'";
 		$query_duplicate = mysqli_query($con, $select_duplicate);
 		if (mysqli_num_rows($query_duplicate) != 0) {
 			$_SESSION["alert"] = "Username or Email is already in use.";

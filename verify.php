@@ -1,8 +1,8 @@
 <?php
 require_once("required/session.php");
-const PAGE_TITLE = "Sign In";
+const PAGE_TITLE = "Verify Your Account";
 require_once("required/sql.php");
-require_once("func/sign-in.php");
+require_once("func/verify.php");
 include_once("includes/head.php");
 include_once("includes/alert.php");
 ?>
@@ -18,7 +18,7 @@ include_once("includes/alert.php");
             <?php
             include_once("includes/header.php");
             include_once("includes/title.php");
-            include_once("includes/sign-in-form.php");
+            include_once("includes/verify.php");
             include_once("includes/footer.php");
             ?>
         </div>

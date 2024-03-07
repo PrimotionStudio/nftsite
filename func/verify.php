@@ -20,7 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 							VALUES ('" . $getuser["id"] . "', 'verify', '$otp')";
 			$query_otp = mysqli_query($con, $create_otp);
 			// Send Mail Here
-			header("location: verify");
+			$loginkey = password_hash(time(), PASSWORD_BCRYPT);
+			$login_user = "UPDATE users SET loginkey='$loginkey'
+							WHERE username='$email' || email='$email'";
+			$query_login = mysqli_query($con, $login_user);
+			$_SESSION["loginkey"] = $loginkey;
+			$_SESSION["user_id"] = $getuser["id"];
+			header("location: account/");
 		}
 	}
 }
