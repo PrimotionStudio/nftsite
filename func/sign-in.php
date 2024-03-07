@@ -8,11 +8,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if (mysqli_num_rows($query_user) == 0) {
 		$_SESSION["alert"] = "Cannot find account linked with that username or email.";
 		header("location: sign-in");
+		exit;
 	} else {
 		$getuser = mysqli_fetch_assoc($query_user);
 		if ($getuser["password"] != $password) {
 			$_SESSION["alert"] = "Invalid Login Credentials";
 			header("location: sign-in");
+			exit;
 		} else {
 			$loginkey = password_hash(time(), PASSWORD_BCRYPT);
 			$login_user = "UPDATE users SET loginkey='$loginkey'
@@ -22,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$_SESSION["user_id"] = $getuser["id"];
 			$_SESSION["alert"] = "Your account has been created";
 			header("location: account/");
+			exit;
 		}
 	}
 }

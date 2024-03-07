@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if ($password != $confirm) {
 		$_SESSION["alert"] = "Passwords do not match";
 		header("location: sign-up");
+		exit;
 	} else {
 		$select_duplicate = "SELECT id, username, email FROM users
 							WHERE username='$username' || email='$email' && verified='true'";
@@ -14,6 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if (mysqli_num_rows($query_duplicate) != 0) {
 			$_SESSION["alert"] = "Username or Email is already in use.";
 			header("location: sign-up");
+			exit;
 		} else {
 			$create_user = "INSERT INTO users (username, email, password)
 							VALUES ('$username', '$email', '$password')";
@@ -31,6 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$_SESSION["otp_mail"] = $email;
 			$_SESSION["user_id"] = $user_id;
 			header("location: verify");
+			exit;
 		}
 	}
 }

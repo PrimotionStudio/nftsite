@@ -9,6 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if (mysqli_num_rows($query_user) == 0) {
 		$_SESSION["alert"] = "Cannot find account";
 		header("location: sign-in");
+		exit;
 	} else {
 		$getuser = mysqli_fetch_assoc($query_user);
 		$select_otp = "SELECT * FROM otp WHERE user_id='$user_id' && otp_code='$otp'";
@@ -17,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if ($get_otp["otp_code"] != $otp) {
 			$_SESSION["alert"] = "Invalid Verification Code";
 			header("location: verify");
+			exit;
 		} else {
 			$delete_otp = "DELETE FROM otp WHERE user_id='$user_id' && otp_code='$otp'";
 			$query_del_otp = mysqli_query($con, $delete_otp);
@@ -28,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$_SESSION["user_id"] = $user_id;
 			unset($_SESSION["otp_mail"]);
 			header("location: account/");
+			exit;
 		}
 	}
 }
