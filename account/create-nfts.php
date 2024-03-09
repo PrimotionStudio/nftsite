@@ -81,7 +81,7 @@ include_once("../includes/alert.php");
 							<div class="card card-body card-plain border-radius-lg d-flex align-items-center">
 								<div class="input-group input-group-outline mb-3">
 									<label class="form-label">Name</label>
-									<input type="text" name="collection_name" class="form-control">
+									<input type="text" name="collection_name" class="form-control" required>
 								</div>
 							</div>
 						</form>
