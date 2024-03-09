@@ -8,6 +8,9 @@ const PAGE_TITLE = "Create NFTs";
 include_once("func/create_collection.php");
 include_once("includes/head.php");
 include_once("../includes/alert.php");
+
+$select_coll = "SELECT * FROM collections WHERE user_id='" . $get_user["id"] . "'";
+$query_coll = mysqli_query($con, $select_coll);
 ?>
 
 <body class="g-sidenav-show bg-gray-200">
@@ -41,23 +44,26 @@ include_once("../includes/alert.php");
 								<div class="row">
 									<div class="col-md-12 mb-md-0 mb-4">
 										<div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row mb-3">
-											<input type="text" name="nft_name" class="form-control p-3 border" placeholder="Enter NFT Name">
+											<input type="text" name="nft_name" class="form-control p-3 border" placeholder="Enter NFT Name" require>
 										</div>
 									</div>
 									<div class="col-md-12 mb-md-0 mb-4">
 										<div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row mb-3">
-											<select name="collection" class="form-select p-3 border" id="">
-												<option value="Option1">Option1</option>
-												<option value="Option2">Option2</option>
-												<option value="Option3">Option3</option>
+											<select name="collection" class="form-select p-3 border" id="" require>
+												<?php
+												while ($get_coll = mysqli_fetch_assoc($query_coll)):
+												?>
+												<option value="<?= ucfirst($get_coll["name"]) ?>"><?= ucfirst($get_coll["name"]) ?></option>
+												<?php
+												endwhile;
+												?>
 											</select>
 										</div>
 									</div>
 									<div class="col-md-12 mb-md-0 mb-4">
 										<div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-column">
-											<!-- <img class="w-50 me-3 mb-0" id="imagePreview" src="assets/img/logos/nft_placeholder.png" alt="logo"> -->
 											<img id="imagePreview" src="#" alt="Image Preview" style="display:none; max-width: 300px; margin: 10px;">
-											<input type="file" name="nft_image" id="nft_image" accept="image/*" onchange="previewImage()">
+											<input type="file" name="nft_image" require id="nft_image" accept="image/*" onchange="previewImage()">
 										</div>
 									</div>
 								</div>

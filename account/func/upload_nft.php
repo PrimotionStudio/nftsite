@@ -1,6 +1,8 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$collection_name = $_POST["collection_name"];
+	$nft_name = $_POST["nft_name"];
+	$collection = $_POST["collection"];
+	$nft_image = $_POST["nft_image"];
 	if (!$collection_name || $collection_name == "") {
 		$_SESSION["alert"] = "Collection Name Must Be Provided";
 		header("location: create-nfts");

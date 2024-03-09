@@ -14,7 +14,7 @@
                     <div class="form-inner">
                         <form action="" method="post" id="contactform">
                             <input id="email" name="email" tabindex="2" value="" aria-required="true" type="email" placeholder="Your Email Address" required>
-                            <input id="pass" name="password" tabindex="3" value="" aria-required="true" type="text" placeholder="Set Your Password" required>
+                            <input id="pass" name="password" tabindex="3" value="" aria-required="true" type="text" placeholder="Your Password" required>
                             <div class="row-form style-1">
                                 <label>Remember me
                                     <input type="checkbox">
