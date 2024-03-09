@@ -283,9 +283,16 @@
 			options
 		);
 	}
-</script>
-
-<script>
+	function upload_nft() {
+		const form = document.getElementById('uploadForm');
+        const formData = new FormData(form);
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'func/upload_nft.php', true);
+        xhr.onload = function() {
+            alert(xhr.responseText);
+        };
+        xhr.send(formData);
+	}
 	function previewImage() {
 		const input = document.getElementById('nft_image');
 		const preview = document.getElementById('imagePreview');

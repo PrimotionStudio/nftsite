@@ -5,6 +5,7 @@ require_once("../required/session.php");
 require_once("../required/sql.php");
 require_once("func/auth.php");
 const PAGE_TITLE = "Create NFTs";
+include_once("func/create_collection.php");
 include_once("includes/head.php");
 include_once("../includes/alert.php");
 ?>
@@ -23,46 +24,48 @@ include_once("../includes/alert.php");
 
 		<div class="container-fluid py-4">
 			<div class="row">
-				<div class="col-lg-8 mb-lg-0 mb-4">
-					<div class="card">
-						<div class="card-header pb-0 p-3">
-							<div class="row">
-								<div class="col-6 d-flex align-items-center">
-									<h6 class="mb-0">Create NFTs / Collections</h6>
-								</div>
-								<div class="col-6 text-end">
-									<a class="btn bg-gradient-dark mb-0" href="javascript:;"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;Save</a>
-								</div>
-							</div>
-						</div>
-						<div class="card-body p-3">
-							<div class="row">
-								<div class="col-md-12 mb-md-0 mb-4">
-									<div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row mb-3">
-										<input type="text" name="nft_name" class="form-control p-3 border" placeholder="Enter NFT Name">
+				<div class="col-lg-8 order-lg-1 order-2">
+					<form action="" method="post" id="upload_nft" enctype="multipart/form-data">
+						<div class="card">
+							<div class="card-header pb-0 p-3">
+								<div class="row">
+									<div class="col-6 d-flex align-items-center">
+										<h6 class="mb-0">Create NFTs / Collections</h6>
 									</div>
-								</div>
-								<div class="col-md-12 mb-md-0 mb-4">
-									<div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row mb-3">
-										<select name="collection" class="form-select p-3 border" id="">
-											<option value="Option1">Option1</option>
-											<option value="Option2">Option2</option>
-											<option value="Option3">Option3</option>
-										</select>
-									</div>
-								</div>
-								<div class="col-md-12 mb-md-0 mb-4">
-									<div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-column">
-										<!-- <img class="w-50 me-3 mb-0" id="imagePreview" src="assets/img/logos/nft_placeholder.png" alt="logo"> -->
-										<img id="imagePreview" src="#" alt="Image Preview" style="display:none; max-width: 300px; margin: 10px;">
-										<input type="file" name="nft_image" id="nft_image" accept="image/*" onchange="previewImage()">
+									<div class="col-6 text-end">
+										<button class="btn bg-gradient-dark mb-0"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;Save</button>
 									</div>
 								</div>
 							</div>
+							<div class="card-body p-3">
+								<div class="row">
+									<div class="col-md-12 mb-md-0 mb-4">
+										<div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row mb-3">
+											<input type="text" name="nft_name" class="form-control p-3 border" placeholder="Enter NFT Name">
+										</div>
+									</div>
+									<div class="col-md-12 mb-md-0 mb-4">
+										<div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row mb-3">
+											<select name="collection" class="form-select p-3 border" id="">
+												<option value="Option1">Option1</option>
+												<option value="Option2">Option2</option>
+												<option value="Option3">Option3</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-12 mb-md-0 mb-4">
+										<div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-column">
+											<!-- <img class="w-50 me-3 mb-0" id="imagePreview" src="assets/img/logos/nft_placeholder.png" alt="logo"> -->
+											<img id="imagePreview" src="#" alt="Image Preview" style="display:none; max-width: 300px; margin: 10px;">
+											<input type="file" name="nft_image" id="nft_image" accept="image/*" onchange="previewImage()">
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>
+					</form>
 				</div>
-				<div class="col-lg-4">
+				<div class="col-lg-4 mb-lg-0 mb-4 order-lg-2 order-1">
 					<div class="card h-30">
 						<form role="form" action="" method="post">
 							<div class="card-header pb-0 p-3">
@@ -78,7 +81,7 @@ include_once("../includes/alert.php");
 							<div class="card card-body card-plain border-radius-lg d-flex align-items-center">
 								<div class="input-group input-group-outline mb-3">
 									<label class="form-label">Name</label>
-									<input type="text" class="form-control">
+									<input type="text" name="collection_name" class="form-control">
 								</div>
 							</div>
 						</form>
