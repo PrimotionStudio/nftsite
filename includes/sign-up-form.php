@@ -15,8 +15,8 @@
                         <form action="" method="post" id="contactform">
                             <input id="username" name="username" tabindex="1" value="" aria-required="true" required type="text" placeholder="Your Username">
                             <input id="email" name="email" tabindex="2" value="" aria-required="true" type="email" placeholder="Your Email Address" required>
-                            <input id="pass" name="password" tabindex="3" value="" aria-required="true" type="text" placeholder="Set Your Password" required>
-                            <input id="password" name="confirm" tabindex="4" value="" aria-required="true" type="text" placeholder="Confirm Your Password" required>
+                            <input id="pass" name="password" tabindex="3" value="" aria-required="true" type="password" placeholder="Set Your Password" required>
+                            <input id="password" name="confirm" tabindex="4" value="" aria-required="true" type="password" placeholder="Confirm Your Password" required>
 
                             <button class="submit">Sign Up</button>
                             <div class="mt-5">

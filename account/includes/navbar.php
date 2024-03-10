@@ -20,7 +20,7 @@
 			</form>
 			<ul class="navbar-nav justify-content-end">
 				<li class="nav-item d-flex align-items-center">
-					<span class="btn btn-outline-primary btn-sm mb-0 me-3">Balance: <?= number_format($get_user["balance"], 2) ?> ETH</span>
+					<span class="btn btn-primary btn-outline-primary btn-sm mb-0 me-3">Balance: <?= number_format($get_user["balance"], 2) ?> ETH</span>
 				</li>
 				<li class="nav-item d-xl-none ps-3 d-flex align-items-center">
 					<a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
