@@ -63,11 +63,9 @@ $query_coll = mysqli_query($con, $select_coll);
 											</div>
 											<div class="card-body p-3">
 												<a href="javascript:;">
-													<h5>
-														Modern
-													</h5>
+													<h5>&gt; <?= $get_nft["name"] ?></h5>
 												</a>
-												<p class="mb-0 text-sm">Project #2</p>
+												<p class="mb-0 text-sm">Created <?= time_ago(strtotime($get_nft["datetime"])) . " - " . date("d F Y, h:ia", strtotime($get_nft["datetime"])) ?></p>
 												<p class="mb-4 text-sm">
 													As Uber works through a huge amount of internal management turmoil.
 												</p>
