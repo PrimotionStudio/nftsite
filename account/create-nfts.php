@@ -28,7 +28,7 @@ $query_coll = mysqli_query($con, $select_coll);
 		<div class="container-fluid py-4">
 			<div class="row">
 				<div class="col-lg-8 order-lg-1 order-2">
-					<form action="" method="post" id="upload_nft" enctype="multipart/form-data">
+					<form action="func/upload_nft.php" method="post" id="upload_nft" enctype="multipart/form-data">
 						<div class="card">
 							<div class="card-header pb-0 p-3">
 								<div class="row">
@@ -36,7 +36,7 @@ $query_coll = mysqli_query($con, $select_coll);
 										<h6 class="mb-0">Create NFTs / Collections</h6>
 									</div>
 									<div class="col-6 text-end">
-										<button class="btn bg-gradient-dark mb-0"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;Save</button>
+										<button class="btn bg-gradient-dark mb-0" type="submit"><i class="material-icons text-sm">add</i>&nbsp;&nbsp;Save</button>
 									</div>
 								</div>
 							</div>
@@ -53,7 +53,7 @@ $query_coll = mysqli_query($con, $select_coll);
 												<?php
 												while ($get_coll = mysqli_fetch_assoc($query_coll)):
 												?>
-												<option value="<?= ucfirst($get_coll["name"]) ?>"><?= ucfirst($get_coll["name"]) ?></option>
+												<option value="<?= ucfirst($get_coll["id"]) ?>"><?= ucfirst($get_coll["name"]) ?></option>
 												<?php
 												endwhile;
 												?>

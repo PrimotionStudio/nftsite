@@ -82,7 +82,7 @@ if (isset($_SESSION["alert"])) {
         }
     </style>
     <!-- Modal -->
-    <div id="md" class="mdl">
+    <div id="md" class="mdl show">
         <div class="mc">
             <div class="mh">
                 <h2 class="mt">Alert</h2>
