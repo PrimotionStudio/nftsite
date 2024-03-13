@@ -61,6 +61,19 @@ $query_coll = mysqli_query($con, $select_coll);
 										</div>
 									</div>
 									<div class="col-md-12 mb-md-0 mb-4">
+										<div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row mb-3">
+											<input type="number" name="nft_price" class="form-control p-3 border" placeholder="Enter NFT Base Price in ETH" require>
+										</div>
+									</div>
+									<div class="col-md-12 mb-md-0 mb-4">
+										<div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row mb-3">
+											<select name="status" class="form-select p-3 border" id="" require>
+												<option value="Idle" selected>Idle</option>
+												<option value="Ongoing Auction">Ongoing Auction</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-12 mb-md-0 mb-4">
 										<div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-column">
 											<img id="imagePreview" src="#" alt="Image Preview" style="display:none; max-width: 300px; margin: 10px;">
 											<input type="file" name="nft_image" require id="nft_image" accept="image/*" onchange="previewImage()">

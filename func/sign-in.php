@@ -22,7 +22,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$query_login = mysqli_query($con, $login_user);
 			$_SESSION["loginkey"] = $loginkey;
 			$_SESSION["user_id"] = $getuser["id"];
-			$_SESSION["alert"] = "Your account has been created";
 			header("location: account/");
 			exit;
 		}

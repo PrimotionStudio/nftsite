@@ -5,7 +5,9 @@ require_once("auth.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$nft_name = $_POST["nft_name"];
+	$nft_price = $_POST["nft_price"];
 	$collection = $_POST["collection"];
+	$status = $_POST["status"];
 	if ($_FILES['nft_image']["name"] == "") {
 		$_SESSION["alert"] =  "An error occured while uploading your file";
 		header("location: create-nfts");
@@ -45,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$new_file_name = "../uploads/nft-" . date("Y-m-d-h:i:sa") . rand(0,999999) . "." . $file_ext;
 		move_uploaded_file($file_tmp, $new_file_name);
 		$nft_image = str_replace("../", "", $new_file_name);
-		$insert_nft = "INSERT INTO nfts (user_id, collection_id, name, file) VALUES ('" . $get_user["id"] . "', '$collection', '$nft_name', '$nft_image')";
+		$insert_nft = "INSERT INTO nfts (user_id, collection_id, name, file, base_price, current_price, status) VALUES ('" . $get_user["id"] . "', '$collection', '$nft_name', '$nft_image', '$nft_price', '$nft_price', '$status')";
 		$query_nft = mysqli_query($con, $insert_nft);
 		$_SESSION["alert"] = "NFT uploaded successfully";
 		header("location: ../create-nfts");
