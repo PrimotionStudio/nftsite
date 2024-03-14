@@ -11,3 +11,11 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
 	<link id="pagestyle" href="assets/css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
 </head>
+<style>
+	.raise-on-hover {
+		transition: transform 0.3s ease-in-out;
+	}
+	.raise-on-hover:hover {
+		transform: translateY(-5px);
+	}
+</style>

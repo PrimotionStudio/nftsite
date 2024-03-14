@@ -4,9 +4,19 @@
 require_once("../required/session.php");
 require_once("../required/sql.php");
 require_once("func/auth.php");
+require_once("func/time_ago.php");
 const PAGE_TITLE = "Explore";
 include_once("includes/head.php");
 include_once("../includes/alert.php");
+$select_live = "SELECT * FROM nfts WHERE status='Auction'";
+$query_live = mysqli_query($con, $select_live);
+$num_live = mysqli_num_rows($query_live);
+$select_nft = "SELECT * FROM nfts WHERE user_id='" . $get_user["id"] . "'";
+$query_nft = mysqli_query($con, $select_nft);
+$num_nft = mysqli_num_rows($query_nft);
+$select_coll = "SELECT * FROM collections WHERE user_id='" . $get_user["id"] . "'";
+$query_coll = mysqli_query($con, $select_coll);
+$num_coll = mysqli_num_rows($query_coll);
 ?>
 
 <body class="g-sidenav-show bg-gray-200">
@@ -47,7 +57,7 @@ include_once("../includes/alert.php");
 								<p class="text-sm mb-0 text-capitalize">
 									Live Auctions
 								</p>
-								<h4 class="mb-0">20</h4>
+								<h4 class="mb-0"><?= $num_live ?></h4>
 							</div>
 						</div>
 					</div>
@@ -62,7 +72,7 @@ include_once("../includes/alert.php");
 								<p class="text-sm mb-0 text-capitalize">
 									My NFTs
 								</p>
-								<h4 class="mb-0">32</h4>
+								<h4 class="mb-0"><?= $num_nft ?></h4>
 							</div>
 						</div>
 					</div>
@@ -77,79 +87,60 @@ include_once("../includes/alert.php");
 								<p class="text-sm mb-0 text-capitalize">
 									My Collections
 								</p>
-								<h4 class="mb-0">15</h4>
+								<h4 class="mb-0"><?= $num_coll ?></h4>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="row mt-4">
-				<div class="col-lg-4 col-md-6 mt-4 mb-4">
-					<div class="card z-index-2">
-						<div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-							<div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-								<div class="chart">
-									<canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
-								</div>
+				<div class="col-12 mt-4 mb-4">
+					<div class="card border-radius-lg px-3 pt-2">
+						<div class="row">
+							<div class="col-6">
+								<h6>NFTs</h6>
 							</div>
-						</div>
-						<div class="card-body">
-							<h6 class="mb-0">Website Views</h6>
-							<p class="text-sm">Last Campaign Performance</p>
-							<hr class="dark horizontal" />
-							<div class="d-flex">
-								<i class="material-icons text-sm my-auto me-1">schedule</i>
-								<p class="mb-0 text-sm">
-									campaign sent 2 days ago
-								</p>
+							<div class="col-6 my-auto text-end text-xs">
+								<a href="#">See More</a>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6 mt-4 mb-4">
-					<div class="card z-index-2">
-						<div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-							<div class="bg-gradient-success shadow-success border-radius-lg py-3 pe-1">
-								<div class="chart">
-									<canvas id="chart-line" class="chart-canvas" height="170"></canvas>
+				<?php
+				$select_live_nft = "SELECT * FROM nfts WHERE status='Auction' ORDER BY RAND() LIMIT 6";
+				$query_live_nft = mysqli_query($con, $select_live_nft);
+				while ($get_live_nft = mysqli_fetch_assoc($query_live_nft)) :
+					$select_nft_coll = "SELECT * FROM collections WHERE id='" . $get_live_nft["collection_id"] . "'";
+					$query_nft_coll = mysqli_query($con, $select_nft_coll);
+					if (mysqli_num_rows($query_nft_coll) != 1) {
+						continue;
+					}
+					$get_nft_coll = mysqli_fetch_assoc($query_nft_coll);
+				?>
+					<div class="col-lg-4 col-md-6 mt-4 mb-4">
+						<div class="card z-index-2">
+							<div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+								<div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1 raise-on-hover" style="background: url('<?= $get_live_nft["file"] ?>') no-repeat scroll center; background-size: cover; height: 200px"></div>
+							</div>
+							<div class="card-body">
+								<div class="d-flex justify-content-between">
+									<h6 class="mb-0"><?= $get_live_nft["name"] ?></h6>
+									<span class="badge bg-primary"><?= number_format($get_live_nft["current_price"], 2) ?> ETH</span>
+								</div>
+								<p class="text-sm"><?= $get_nft_coll["name"] ?></p>
+								<hr class="dark horizontal" />
+								<div class="d-flex">
+									<i class="material-icons text-sm my-auto me-1">schedule</i>
+									<p class="mb-0 text-sm">
+										<?= time_ago(strtotime($get_live_nft["datetime"])) . " - " . date("d F Y, h:ia", strtotime($get_live_nft["datetime"])) ?>
+									</p>
 								</div>
 							</div>
 						</div>
-						<div class="card-body">
-							<h6 class="mb-0">Daily Sales</h6>
-							<p class="text-sm">
-								(<span class="font-weight-bolder">+15%</span>) increase in today sales.
-							</p>
-							<hr class="dark horizontal" />
-							<div class="d-flex">
-								<i class="material-icons text-sm my-auto me-1">schedule</i>
-								<p class="mb-0 text-sm">
-									updated 4 min ago
-								</p>
-							</div>
-						</div>
 					</div>
-				</div>
-				<div class="col-lg-4 mt-4 mb-3">
-					<div class="card z-index-2">
-						<div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-							<div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
-								<div class="chart">
-									<canvas id="chart-line-tasks" class="chart-canvas" height="170"></canvas>
-								</div>
-							</div>
-						</div>
-						<div class="card-body">
-							<h6 class="mb-0">Completed Tasks</h6>
-							<p class="text-sm">Last Campaign Performance</p>
-							<hr class="dark horizontal" />
-							<div class="d-flex">
-								<i class="material-icons text-sm my-auto me-1">schedule</i>
-								<p class="mb-0 text-sm">just updated</p>
-							</div>
-						</div>
-					</div>
-				</div>
+				<?php
+				endwhile;
+				?>
 			</div>
 			<div class="row mb-4">
 				<div class="col-lg-8 col-md-6 mb-md-0 mb-4">
